@@ -1,0 +1,50 @@
+<html>
+  <head><title>ThriftFish</title>
+    <script type="text/javascript" src="/javascript/jquery-1.3.2.min.js"></script>
+    <script type="text/javascript" src="/javascript/jquery.dateFormat-1.0.js"></script>
+    <script type="text/javascript" src="/javascript/jquery-ui-1.7.custom.min-blurred.js"></script>
+    <script type="text/javascript" src="/javascript/enter.js"></script>
+    <script type="text/javascript" src="/javascript/search.js"></script>
+    <link type="text/css" rel="stylesheet" href="/stylesheets/home.css">
+    <body>
+      <img width="485" src="/static/images/fish.png" style="z-index:-1;postion:absolute;margin-bottom:-400px;margin-top:-300px" border="0"><Br> 
+      <table><tr><td>
+	    <p><div class="LogoText"><a href="http://www.thriftfish.com/"><img src="/static/images/Logo_7.png" border="0"x></a></div></p>
+	    <form action="/search" method="get" name="search">
+	      <div class="BodyText">
+		<input type="text" value="{{ term }}" onclick="value='';" name="q" size="40" onKeyPress="checkEnter(event)">
+		Price:
+		<input type="text" value="{{ min }}" onclick="value='';" name="Min" style="width: 100px;" onKeyPress="checkEnter(event)">&nbsp;
+		<input type="text" value="{{ max }}" onclick="value='';" name="Max" style="width: 100px;" onKeyPress="checkEnter(event)">
+	      </div>
+	      
+	      <div class="BodyText">
+		<input onclick="window.location='document.form[0].submit()" type="Submit"  class="save_query" value="Search">
+		<input onclick="javascript:saveThing(event)" type="button" class="save_query" value="Add this to My Wants">
+		<font style="float: right">
+		  City:
+		  <input type="text" value="{{ city }}" onclick="value='';" name="City" style="width: 214px;"  onKeyPress="checkEnter(event)">
+		</font>
+	      </div>
+	    </form>
+      </td></tr></table>
+      
+      <div class="HeaderText" style="text-align:right;margin-top:30px;color:aaaaaa;font-size:50;position:relative;z-index:1;width:950;">Results:</div>
+      <div class="BodyText" style="text-align: left;margin-left: auto;margin-right: auto;width: 950;">
+	{% if results.0 %}
+	{% for e in results %}
+        <p class="ResultsText" style='background-color: {% cycle B8FFB8,C3EBFF %};'>
+	  <A href='{{ e.link }}'>
+	    {{ forloop.counter}}. {{ e.title }}</a>
+	</p>
+	{% endfor %}
+	{% else %}
+	<p class="ResultsText" style='background-color: {% cycle B8FFB8,C3EBFF %};'>
+	  <b>Sorry, there don't seem to be any results for that item</b>
+	</p>
+	{% endif %}
+      </div>
+
+      <div class="Footer"><a href="/about">About</a>&nbsp;|&nbsp;<a href="{{ url }}">{{ url_linktext }}</a>&nbsp;|&nbsp;<a href="mailto:rogercosseboom@gmail.com">Email</a></div>
+    </body>
+</html>

@@ -1,0 +1,25 @@
+<html>
+  <head><title>ThriftFish</title>
+    <script type="text/javascript" src="/javascript/enter.js"></script>
+    <link type="text/css" rel="stylesheet" href="/stylesheets/home.css"> 
+    <body>  
+      <div class="LogoText" style="text-align: center;margin-left:auto;margin-right:auto;width:100%;overflow:hidden"> 
+      <img width="485" src="/static/images/fish.png" style="postion:absolute;margin-top:0px;margin-right:700px;" border="0">
+      <p style="margin-top:-450px;margin-bottom:-10;"><a href="http://www.thriftfish.com/"><img src="/static/images/Logo_big.png" border="0"></a></p>
+      <table align="center"><tr><td> 
+	    <form action="/search" method="get" name="search" style="background-color:ffffff;padding:20;"> 
+	      <div class="BodyText"> 
+		<input class="shadow" type="text" value="Search for an item" onclick="value='';" name="q" style="width: 565px;" onKeyPress="checkEnter(event)"> 
+	      </div> 
+	      <div class="BodyText" style="color:555555"> 
+		Price:
+		<input class="shadow" type="text" value="Min" onclick="value='';" name="Min" style="width: 100px;" onKeyPress="checkEnter(event)">&nbsp;
+		<input class="shadow" type="text" value="Max" onclick="value='';" name="Max" style="width: 100px;" onKeyPress="checkEnter(event)"> 
+		City:
+		<input class="shadow" type="text" value="Pittsburgh" onclick="value='';" name="City" style="width: 214px;"  onKeyPress="checkEnter(event)"> 
+	      </div> 
+	    </form> 
+      </td></tr></table> 
+      <div class="Footer"><a href="/about">About</a>&nbsp;|&nbsp;<a href="{{ url }}">{{ url_linktext }}</a>&nbsp;|&nbsp;<a href="mailto:rogercosseboom@gmail.com">Email</a></div>
+    </body> 
+</html>

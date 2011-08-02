@@ -1,0 +1,70 @@
+application: my-want-list
+version: 4
+runtime: python
+api_version: 1
+
+builtins:
+- deferred: on
+
+handlers:
+- url: /favicon.ico
+  static_files: static/images/favicon.ico
+  upload: static/images/favicon.ico
+
+- url: /stylesheets
+  static_dir: stylesheets
+
+- url: /titan/.*
+  script: /titan/titan.py
+
+- url: /email_amy
+  script: urls.py
+  login: admin
+  
+- url: /titan
+  script: /titan/titan.py
+  
+- url: /javascript
+  static_dir: javascript
+
+- url: /static/images/
+  static_dir: static/images
+
+- url: /email_handler
+  script: urls.py
+  login: admin
+
+- url: /cron_fetch_handler
+  script: urls.py
+  login: admin
+
+- url: /email_task
+  script: urls.py
+  login: admin
+
+- url: /remove_task
+  script: urls.py
+  login: admin
+  
+- url: /user_handler
+  script: urls.py
+  login: admin
+
+- url: /scrape_handler
+  script: urls.py
+  login: admin
+  
+- url: /query_handler
+  script: urls.py
+  login: admin
+  
+- url: /fetch_query_task
+  script: urls.py
+  login: admin
+
+- url: /about
+  static_files: static/about.html
+  upload: static/about.html
+
+- url: /.*
+  script: urls.py

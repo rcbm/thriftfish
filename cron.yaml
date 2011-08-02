@@ -1,0 +1,8 @@
+cron:
+- description: fetch + parse new entries
+  url: /cron_fetch_handler
+  schedule: every 12 hours synchronized
+  
+- description: The daily email blast
+  url: /email_handler
+  schedule: every 24 hours synchronized

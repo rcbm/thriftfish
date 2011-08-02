@@ -1,0 +1,115 @@
+<html>
+  <head><title>ThriftFish</title>
+  <script type="text/javascript" src="javascript/jquery-1.3.2.min.js"></script>
+  <script type="text/javascript" src="javascript/jquery.dateFormat-1.0.js"></script>
+  <script type="text/javascript" src="javascript/jquery-ui-1.7.custom.min-blurred.js"></script>
+    <script type="text/javascript" language="javascript">
+      function checkEnter(e) { 
+        var characterCode
+
+        if (e && e.which) {
+          characterCode = e.which
+          e = e
+        } else {
+          e = event
+          characterCode = e.keyCode
+        }
+
+        if(characterCode == 13){
+          document.forms[0].submit()
+          return false
+        } else {
+          return true
+        }
+      }
+    </script>
+    <script type="text/javascript" src="javascript/user.js"></script>
+   <link type="text/css" rel="stylesheet" href="/stylesheets/home.css">
+    <body>
+
+
+      <table><tr><td>
+	          <p><div class="LogoText"><a href="http://my-want-list.appspot.com/"><img src="/static/images/logo_header.png"></a></div></p>
+      <form action="/search" method="get" name="search">
+	<div class="BodyText">
+	    <input type="text" value="Search for an item" onclick="value='';" name="q" size="40" onKeyPress="checkEnter(event)">
+	      Price:
+	      <input type="text" value="Min" onclick="value='';" name="Min" style="width: 100px;" onKeyPress="checkEnter(event)">&nbsp;
+	        <input type="text" value="Max" onclick="value='';" name="Max" style="width: 100px;" onKeyPress="checkEnter(event)">
+      </div>
+     
+      <div class="BodyText">
+	<input onclick="window.location='document.form[0].submit()" type="Submit" class="save_query" value="Search">
+	<input onclick="javascript:saveThing(event)" type="button" class="save_query" value="Add this to My Wants">
+	<font style="float: right">
+	    City:
+	      <input type="text" value="Pittsburgh" onclick="value='';" name="City" style="width: 214px;"  onKeyPress="checkEnter(event)">
+	      </font>
+      </div>
+      </form>
+      </td></tr></table>
+
+
+   
+        <div class="HeaderText" style="margin-top:30px;color:3399ff;">My Want List:</div>
+      <div class="BodyText" style="text-align: left;margin-left: auto;margin-right: auto;width: 80%;">
+
+	<div id="accordion"> 
+	    
+	    {% for q in querylist %}
+	      <div class="stream_container">
+
+		<div class="stream" >
+		    <p class="ResultsText" style='background-color: {% cycle CCFFCC,CCFFFF %};'>
+
+		          {{ q.1 }}
+                      {% if q.3 %}<span>&nbsp;&nbsp;|&nbsp;&nbsp;<b>{{ q.3|length }}</b> fresh&nbsp;&nbsp;|&nbsp;&nbsp;
+			      <a href="" onclick="javascript: $.ajax({url: '/removeFresh?q={{q.2}}',context: document.body,type: 'POST'});
+						    $(this).parent().fadeOut();
+						      $('.results-{{ forloop.counter }}').fadeOut(function() {$('.results-{{ forloop.counter }}').empty();$('.results-{{ forloop.counter }}').append(
+						        blah)});">(remove all)</a></span>
+			        {% endif %}
+			     <span style="float: right">
+			            <a href="" onclick="$.ajax({url: '/removeQuery?q={{q.0}}',context: document.body,type: 'POST'});" name="{{q.0}}">
+				             <img class="x" width="20" height="20" src='/static/images/close_x.gif'>
+					        </a></span>
+			        
+			     </p></div>
+		
+		<div class="results-{{ forloop.counter }}">
+		  
+		    <div>
+		            
+		            {% if q.3 %}
+			          <div>    {%comment%}<div class="results-{{ forloop.counter }}">{%endcomment%}
+				            {% for e in q.3 %}
+				            <p class="ResultsText" style='margin-left: 0px;background-color: FFFFCC;' >
+					      {{ forloop.counter}}. <a href="{{ e.2.link }}">{{ e.2.title }}</a>
+					        &nbsp;&nbsp;|&nbsp;&nbsp;
+					        <a  href=""  class="hideFresh" onclick="$.ajax({url: '/removeEntry?q={{e.0}}&p={{e.1}}',context: document.body,type: 'POST'});$(this).parent().fadeOut();">(delete)</a>
+						        </p>
+					           {% endfor %}
+					          </div>
+				      {% else %}
+
+				          <p class="ResultsText" style="margin-left: 0px;background-color: FFFFCC;" >
+					    <b>Sorry, there don't seem to be any fresh results right now</b>
+					          </p>
+					        {% endif %}
+					      </div>
+				        
+				      </div>
+		        
+		      </div>
+		{% endfor %}
+		  </div>
+
+	      
+<div class="HeaderText" style="font-style: italic;margin-top: 90px;font-color: '#aaaaaa';text-align: center;margin-left: auto;margin-right: auto;width: 80%;"><a href="/about">About</a>&nbsp;|&nbsp;<a href="{{ url }}">{{ url_linktext }}</a>&nbsp;|&nbsp;<a href="mailto:rogercosseboom@gmail.com">Email</a></div>
+
+
+</div>
+
+</body>
+</html>
+

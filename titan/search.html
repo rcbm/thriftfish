@@ -1,0 +1,31 @@
+<div style="margin-top:40px;">
+  {% if item_pairs %}
+
+
+
+  
+  {% for item, offers in item_pairs %}
+  <p class="ResultsText" style='background-color: {% cycle dddddd,cccccc %};'>
+    <A href='{{ item.0 }}'>
+      {{ forloop.counter}}.  <b>{{ item.1 }}</b>
+      {% if offers.new %}
+      &nbsp;&nbsp;|&nbsp;&nbsp;
+        New from: <b>{{offers.new.formatted}}</b>
+      {%endif%}
+      {% if offers.used %}
+        &nbsp;&nbsp;|&nbsp;&nbsp;
+        Used from : <b>{{offers.used.formatted}}</b>
+      {%endif%}
+    </a>
+  </p>
+  {% endfor %}
+  
+
+
+
+  {% else %}
+  <p class="ResultsText" style='background-color:dddddd;'>
+    <b>Sorry, there don't seem to be any results for that item</b>
+  </p>
+  {% endif %}
+</div>
